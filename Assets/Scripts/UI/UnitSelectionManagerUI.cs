@@ -5,6 +5,12 @@ public class UnitSelectionManagerUI : MonoBehaviour {
 
     [SerializeField] private RectTransform selectionAreaRectTransform;
 
+    private Canvas canvas;
+
+    private void Awake() {
+        canvas = GetComponentInParent<Canvas>();
+    }
+
     private void Start() {
         selectionAreaRectTransform.gameObject.SetActive(false);
 
@@ -45,10 +51,11 @@ public class UnitSelectionManagerUI : MonoBehaviour {
 
         Rect selectionRectArea = UnitSelectorManager.Instance.GetSelectionRectArea();
 
-        selectionAreaRectTransform.anchoredPosition = new Vector2(
-            selectionRectArea.x,
-            selectionRectArea.y
-        );
-        selectionAreaRectTransform.sizeDelta = new Vector2(selectionRectArea.width, selectionRectArea.height);
+        Vector2 lowerLeftCornerUI = selectionRectArea.min / canvas.scaleFactor;
+        Vector2 upperRightUI = selectionRectArea.max / canvas.scaleFactor;
+
+        selectionAreaRectTransform.anchoredPosition = lowerLeftCornerUI;
+        selectionAreaRectTransform.sizeDelta = upperRightUI - lowerLeftCornerUI;
     }
+
 }
