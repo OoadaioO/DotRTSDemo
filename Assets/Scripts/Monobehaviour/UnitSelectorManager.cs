@@ -71,6 +71,7 @@ public class UnitSelectorManager : MonoBehaviour {
 
                         Selected selected = entityManager.GetComponentData<Selected>(entityArray[i]);
                         selected.onSelected = true;
+                        selected.onDeselected = false;
                         entityManager.SetComponentData(entityArray[i], selected);
                     }
                 }
@@ -101,6 +102,7 @@ public class UnitSelectorManager : MonoBehaviour {
                         entityManager.SetComponentEnabled<Selected>(raycastHit.Entity, true);
                         Selected selected = entityManager.GetComponentData<Selected>(raycastHit.Entity);
                         selected.onSelected = true;
+                        selected.onDeselected = false;
                         entityManager.SetComponentData(raycastHit.Entity, selected);
 
                     }
