@@ -4,12 +4,7 @@ using UnityEngine;
 public class UnitSelectionManagerUI : MonoBehaviour {
 
     [SerializeField] private RectTransform selectionAreaRectTransform;
-
-    private Canvas canvas;
-
-    private void Awake() {
-        canvas = GetComponentInParent<Canvas>();
-    }
+    [SerializeField] private Canvas canvas;
 
     private void Start() {
         selectionAreaRectTransform.gameObject.SetActive(false);
@@ -36,8 +31,6 @@ public class UnitSelectionManagerUI : MonoBehaviour {
     }
 
 
-
-
     // Update is called once per frame
     private void Update() {
 
@@ -51,11 +44,8 @@ public class UnitSelectionManagerUI : MonoBehaviour {
 
         Rect selectionRectArea = UnitSelectorManager.Instance.GetSelectionRectArea();
 
-        Vector2 lowerLeftCornerUI = selectionRectArea.min / canvas.scaleFactor;
-        Vector2 upperRightUI = selectionRectArea.max / canvas.scaleFactor;
-
-        selectionAreaRectTransform.anchoredPosition = lowerLeftCornerUI;
-        selectionAreaRectTransform.sizeDelta = upperRightUI - lowerLeftCornerUI;
+        selectionAreaRectTransform.anchoredPosition = selectionRectArea.min / canvas.scaleFactor;
+        selectionAreaRectTransform.sizeDelta = new Vector2(selectionRectArea.width,selectionRectArea.height);
     }
 
 }
