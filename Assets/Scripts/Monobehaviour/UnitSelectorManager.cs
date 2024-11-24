@@ -80,6 +80,7 @@ public class UnitSelectorManager : MonoBehaviour {
             } else {
                 // single select
                 entityQuery = entityManager.CreateEntityQuery(typeof(PhysicsWorldSingleton));
+
                 PhysicsWorldSingleton physicsWorldSingleton = entityQuery.GetSingleton<PhysicsWorldSingleton>();
                 CollisionWorld collisionWorld = physicsWorldSingleton.CollisionWorld;
 
@@ -91,18 +92,17 @@ public class UnitSelectorManager : MonoBehaviour {
                     End = cameraRay.GetPoint(9999f),
                     Filter = new CollisionFilter {
                         BelongsTo = ~0u,
-                        CollidesWith = (uint)unitLayer.value,
+                        CollidesWith = GameAssets.unitLayer,
                         GroupIndex = 0,
                     }
 
                 };
                 if (collisionWorld.CastRay(raycastInput, out Unity.Physics.RaycastHit raycastHit)) {
-                    if (entityManager.HasComponent<Unit>(raycastHit.Entity)) {
+                    if (entityManager.HasComponent<Unit>(raycastHit.Entity) &&  entityManager.HasComponent<Selected>(raycastHit.Entity)) {
                         // Hit a unit
                         entityManager.SetComponentEnabled<Selected>(raycastHit.Entity, true);
                         Selected selected = entityManager.GetComponentData<Selected>(raycastHit.Entity);
                         selected.onSelected = true;
-                        selected.onDeselected = false;
                         entityManager.SetComponentData(raycastHit.Entity, selected);
 
                     }

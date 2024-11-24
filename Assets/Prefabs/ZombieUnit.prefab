@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5712307542711519413, guid: 8f26c57fe648a4608b44bb8bce4dea9f, type: 3}
+      propertyPath: faction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7491741225930983857, guid: 8f26c57fe648a4608b44bb8bce4dea9f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -56,6 +60,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 85cd5279f313d294c8d4eb59ece3cb5b, type: 2}
+    - target: {fileID: 8286004846539674171, guid: 8f26c57fe648a4608b44bb8bce4dea9f, type: 3}
+      propertyPath: range
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8723343855319319170, guid: 8f26c57fe648a4608b44bb8bce4dea9f, type: 3}
       propertyPath: m_Name
       value: ZombieUnit
@@ -67,5 +75,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8723343855319319170, guid: 8f26c57fe648a4608b44bb8bce4dea9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7181137381640514997}
   m_SourcePrefab: {fileID: 100100000, guid: 8f26c57fe648a4608b44bb8bce4dea9f, type: 3}
+--- !u!1 &113670701352389350 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8723343855319319170, guid: 8f26c57fe648a4608b44bb8bce4dea9f, type: 3}
+  m_PrefabInstance: {fileID: 8690924606877304932}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-7181137381640514997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113670701352389350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a838753a1bdad44b99210791295e3a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

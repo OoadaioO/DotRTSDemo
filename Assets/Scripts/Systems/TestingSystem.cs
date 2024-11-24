@@ -1,4 +1,5 @@
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
@@ -8,24 +9,25 @@ using UnityEngine;
 [BurstCompile]
 partial class TestingSystem : SystemBase {
 
-  
+
 
     protected override void OnUpdate() {
 
-       //TestSelectedTag();
+        //TestCount();
+
+        if (Input.GetKeyDown(KeyCode.T)) {
+            foreach ((RefRW<Health> health, Entity entity) in SystemAPI.Query<RefRW<Health>>().WithEntityAccess()) {
+                health.ValueRW.healthAmount = -1;
+                Debug.Log("set target health 0:" + entity);
+            }
+        }
     }
 
-    private void TestSelectedTag() {
+    private void TestCount() {
         int unitCount = 0;
 
-        foreach ((
-                    RefRW<LocalTransform> localTransform,
-                    RefRO<UnitMover> unitMover,
-                    RefRW<PhysicsVelocity> physicsVelocity
-                ) in SystemAPI.Query<RefRW<LocalTransform>, RefRO<UnitMover>, RefRW<PhysicsVelocity>>().WithDisabled<Selected>()) {
-
+        foreach (RefRO<LocalTransform> localTransform in SystemAPI.Query<RefRO<LocalTransform>>().WithAll<Friendly>()) {
             unitCount++;
-
         }
 
         Debug.Log("unit Count:" + unitCount);
