@@ -34,23 +34,26 @@ partial struct BulletMoveSystem : ISystem {
             }
 
             LocalTransform targetLocalTransform = SystemAPI.GetComponent<LocalTransform>(target.ValueRO.targetEntity);
+            ShootVictim shootVictim = SystemAPI.GetComponent<ShootVictim>(target.ValueRO.targetEntity);
 
-            float3 moveDirection = targetLocalTransform.Position - localTransform.ValueRO.Position;
+            float3 targetPosition = targetLocalTransform.TransformPoint(shootVictim.hitLocalPosition); 
+
+            float3 moveDirection = targetPosition - localTransform.ValueRO.Position;
             moveDirection = math.normalizesafe(moveDirection);
 
-            float distanceBeforeSq = math.distancesq(localTransform.ValueRO.Position, targetLocalTransform.Position);
+            float distanceBeforeSq = math.distancesq(localTransform.ValueRO.Position, targetPosition);
 
             localTransform.ValueRW.Position += bullet.ValueRO.speed * SystemAPI.Time.DeltaTime * moveDirection;
 
-            float distanceAfterSq = math.distancesq(localTransform.ValueRO.Position, targetLocalTransform.Position);
+            float distanceAfterSq = math.distancesq(localTransform.ValueRO.Position, targetPosition);
 
             if (distanceAfterSq > distanceBeforeSq) {
                 // overshot
-                localTransform.ValueRW.Position = targetLocalTransform.Position;
+                localTransform.ValueRW.Position = targetPosition;
             }
 
             float destoryDistanceSq = 0.0000001f;
-            if ((float)math.distancesq(localTransform.ValueRO.Position, targetLocalTransform.Position) < destoryDistanceSq) {
+            if ((float)math.distancesq(localTransform.ValueRO.Position, targetPosition) < destoryDistanceSq) {
                 // Close enough to damage target
                 RefRW<Health> targetHealth = SystemAPI.GetComponentRW<Health>(target.ValueRO.targetEntity);
                 targetHealth.ValueRW.healthAmount -= bullet.ValueRO.damageAmount;
