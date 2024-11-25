@@ -3,7 +3,6 @@ using Unity.Entities;
 
 
 [UpdateInGroup(typeof(LateSimulationSystemGroup))]
-[UpdateBefore(typeof(ResetTargetSystem))]
 partial struct HealthDeadTestSystem : ISystem {
 
 

@@ -14,11 +14,24 @@ partial struct BulletMoveSystem : ISystem {
     [BurstCompile]
     public void OnUpdate(ref SystemState state) {
 
+
         EntityCommandBuffer entityCommandBuffer = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
 
-        foreach ((RefRW<LocalTransform> localTransform, RefRO<Bullet> bullet, RefRW<Target> target, Entity entity)
-            in SystemAPI.Query<RefRW<LocalTransform>, RefRO<Bullet>, RefRW<Target>>().WithEntityAccess()) {
+        foreach ((
+            RefRW<LocalTransform> localTransform,
+            RefRO<Bullet> bullet,
+            RefRW<Target> target,
+            Entity entity)
+            in SystemAPI.Query<
+                RefRW<LocalTransform>,
+                RefRO<Bullet>,
+                RefRW<Target>>().WithEntityAccess()) {
 
+
+            if (target.ValueRO.targetEntity == Entity.Null) {
+                entityCommandBuffer.DestroyEntity(entity);
+                continue;
+            }
 
             LocalTransform targetLocalTransform = SystemAPI.GetComponent<LocalTransform>(target.ValueRO.targetEntity);
 
