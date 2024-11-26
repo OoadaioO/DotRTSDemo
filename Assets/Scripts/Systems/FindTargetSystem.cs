@@ -42,6 +42,9 @@ partial struct FindTargetSystem : ISystem {
             };
             if (collisionWorld.OverlapSphere(localTransform.ValueRO.Position, findTarget.ValueRO.range, ref distanceHitList, collisionFilter)) {
                 foreach (DistanceHit distanceHit in distanceHitList) {
+                    if(!SystemAPI.Exists(distanceHit.Entity) || !SystemAPI.HasComponent<LocalTransform>(distanceHit.Entity)){
+                        continue;
+                    }
                     Unit targetUnit = SystemAPI.GetComponent<Unit>(distanceHit.Entity);
                     if (targetUnit.faction == findTarget.ValueRO.targetFaction) {
                         target.ValueRW.targetEntity = distanceHit.Entity;
