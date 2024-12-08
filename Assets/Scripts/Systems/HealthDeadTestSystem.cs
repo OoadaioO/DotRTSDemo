@@ -1,7 +1,7 @@
 using Unity.Burst;
 using Unity.Entities;
 
-
+[RequireMatchingQueriesForUpdate]
 [UpdateInGroup(typeof(LateSimulationSystemGroup))]
 partial struct HealthDeadTestSystem : ISystem {
 

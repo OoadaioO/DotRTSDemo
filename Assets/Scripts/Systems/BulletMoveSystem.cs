@@ -3,6 +3,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
+[RequireMatchingQueriesForUpdate]
 partial struct BulletMoveSystem : ISystem {
 
     [BurstCompile]
