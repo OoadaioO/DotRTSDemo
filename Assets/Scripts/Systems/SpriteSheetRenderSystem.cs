@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -23,50 +24,47 @@ partial class SpriteSheetRenderSystem : SystemBase {
             return;
         }
 
+        int entityCount = GameHandler.Instance.EntityCount;
 
-        List<float4x4> matrixList = new List<float4x4>();
-        List<float4> uvList = new List<float4>();
+        NativeArray<float4x4> matrixArray = new NativeArray<float4x4>(entityCount, Allocator.TempJob);
+        NativeArray<float4> uvArray = new NativeArray<float4>(entityCount, Allocator.TempJob);
 
-        Entities.ForEach((ref LocalTransform localTransform, ref SpriteSheetAnimation_Data spriteSheetAnimationData) => {
 
-            matrixList.Add(spriteSheetAnimationData.matrix);
-            uvList.Add(spriteSheetAnimationData.uv);
-            // MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
+        Entities.ForEach((int entityInQueryIndex, ref LocalTransform localTransform, ref SpriteSheetAnimation_Data spriteSheetAnimationData) => {
+            matrixArray[entityInQueryIndex] = spriteSheetAnimationData.matrix;
+            uvArray[entityInQueryIndex] = spriteSheetAnimationData.uv;
 
-            // materialPropertyBlock.SetVectorArray("_Main_UV", new Vector4[] { spriteSheetAnimationData.uv });
-
-            // Graphics.DrawMesh(
-            //     mesh,
-            //     spriteSheetAnimationData.matrix,
-            //     material,
-            //     0,  // layer
-            //     Camera.main,
-            //     0,  // submesh index
-            //     materialPropertyBlock
-            // );
         })
         .WithAll<TestTag>()
-        .WithoutBurst()
-        .Run();
+        .WithBurst()
+        .ScheduleParallel();
+
+        CompleteDependency();
+
 
         ComputeBuffer uvBuffer = GameHandler.Instance.uvBuffer;
         ComputeBuffer matrixBuffer = GameHandler.Instance.matrixBuffer;
-        int count = GameHandler.Instance.EntityCount;
+
 
         if (uvBuffer == null || matrixBuffer == null) {
+            matrixArray.Dispose();
+            uvArray.Dispose();
             return;
         }
 
 
-        uvBuffer.SetData(uvList);
-        matrixBuffer.SetData(matrixList);
+        uvBuffer.SetData(uvArray);
+        matrixBuffer.SetData(matrixArray);
 
 
-        material.SetBuffer("_uvBuffer",uvBuffer);
-        material.SetBuffer("_matrixBuffer",matrixBuffer);
+        material.SetBuffer("_uvBuffer", uvBuffer);
+        material.SetBuffer("_matrixBuffer", matrixBuffer);
 
         Bounds bounds = new Bounds(float3.zero, new float3(float.MaxValue, float.MaxValue, float.MaxValue));
-        Graphics.DrawMeshInstancedProcedural(mesh, 0, material, bounds, count);
+        Graphics.DrawMeshInstancedProcedural(mesh, 0, material, bounds, entityCount);
+
+        matrixArray.Dispose();
+        uvArray.Dispose();
     }
 
     protected override void OnDestroy() {

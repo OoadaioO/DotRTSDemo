@@ -1,0 +1,17 @@
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/GAToUnityCallbacks.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/MacroEnd.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/MacroHeaderBegin.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/MacroSourceBegin.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGAApplication.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGAConfiguration.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGADebug.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGAEvents.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGAInput.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGASoftKeyboard.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGASoftKeyboardCallbacks.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGATypes.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UGAVersion.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UnityToGACallbacks.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UnityToGAConfigurationCallbacks.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UnityToGAKeyEventCallbacks.h
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/UnityToGAMotionEventCallbacks.h

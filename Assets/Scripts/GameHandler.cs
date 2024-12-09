@@ -30,6 +30,11 @@ public class GameHandler : MonoBehaviour, IDisposable {
 
     private void Awake() {
         Instance = this;
+        // 只在android 平台设置为60
+        if (Application.platform == RuntimePlatform.Android) {
+            Application.targetFrameRate = 60;
+        }
+
     }
 
     private void Start() {

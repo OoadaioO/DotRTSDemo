@@ -292,6 +292,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.xb.lib": {
+      "version": "git@github.com:OoadaioO/UnityLib.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c7742e125a607c2a552fa430371c200ae759f719"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,

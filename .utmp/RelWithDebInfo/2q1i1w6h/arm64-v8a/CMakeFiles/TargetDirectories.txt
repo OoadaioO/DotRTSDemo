@@ -1,0 +1,5 @@
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/.utmp/RelWithDebInfo/2q1i1w6h/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/.utmp/RelWithDebInfo/2q1i1w6h/arm64-v8a/CMakeFiles/rebuild_cache.dir
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/.utmp/RelWithDebInfo/2q1i1w6h/arm64-v8a/GameActivity/CMakeFiles/game.dir
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/.utmp/RelWithDebInfo/2q1i1w6h/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+/Users/boxu/Downloads/DOTS_RTS_Course_1020_UnityLayout/.utmp/RelWithDebInfo/2q1i1w6h/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
