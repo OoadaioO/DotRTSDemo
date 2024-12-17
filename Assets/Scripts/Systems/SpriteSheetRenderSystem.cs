@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -24,47 +23,37 @@ partial class SpriteSheetRenderSystem : SystemBase {
             return;
         }
 
-        int entityCount = GameHandler.Instance.EntityCount;
 
-        NativeArray<float4x4> matrixArray = new NativeArray<float4x4>(entityCount, Allocator.TempJob);
-        NativeArray<float4> uvArray = new NativeArray<float4>(entityCount, Allocator.TempJob);
+        List<float4x4> matrixList = new List<float4x4>();
+        List<float4> uvList = new List<float4>();
 
+        Entities.ForEach((ref LocalTransform localTransform, ref SpriteSheetAnimation_Data spriteSheetAnimationData) => {
 
-        Entities.ForEach((int entityInQueryIndex, ref LocalTransform localTransform, ref SpriteSheetAnimation_Data spriteSheetAnimationData) => {
-            matrixArray[entityInQueryIndex] = spriteSheetAnimationData.matrix;
-            uvArray[entityInQueryIndex] = spriteSheetAnimationData.uv;
-
+            matrixList.Add(spriteSheetAnimationData.matrix);
+            uvList.Add(spriteSheetAnimationData.uv);
         })
         .WithAll<TestTag>()
-        .WithBurst()
-        .ScheduleParallel();
-
-        CompleteDependency();
-
+        .WithoutBurst()
+        .Run();
 
         ComputeBuffer uvBuffer = GameHandler.Instance.uvBuffer;
         ComputeBuffer matrixBuffer = GameHandler.Instance.matrixBuffer;
-
+        int count = GameHandler.Instance.EntityCount;
 
         if (uvBuffer == null || matrixBuffer == null) {
-            matrixArray.Dispose();
-            uvArray.Dispose();
             return;
         }
 
 
-        uvBuffer.SetData(uvArray);
-        matrixBuffer.SetData(matrixArray);
+        uvBuffer.SetData(uvList);
+        matrixBuffer.SetData(matrixList);
 
 
-        material.SetBuffer("_uvBuffer", uvBuffer);
-        material.SetBuffer("_matrixBuffer", matrixBuffer);
+        material.SetBuffer("_uvBuffer",uvBuffer);
+        material.SetBuffer("_matrixBuffer",matrixBuffer);
 
         Bounds bounds = new Bounds(float3.zero, new float3(float.MaxValue, float.MaxValue, float.MaxValue));
-        Graphics.DrawMeshInstancedProcedural(mesh, 0, material, bounds, entityCount);
-
-        matrixArray.Dispose();
-        uvArray.Dispose();
+        Graphics.DrawMeshInstancedProcedural(mesh, 0, material, bounds, count);
     }
 
     protected override void OnDestroy() {
