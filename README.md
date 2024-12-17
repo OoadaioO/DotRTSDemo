@@ -4,7 +4,7 @@
 
 demo
 
-![](assets/2024-12-17-09-32-34.png)
+![](images/2024-12-17-09-32-34.png)
 
 ## 二、Unity 2D Animation 探索实验
 
